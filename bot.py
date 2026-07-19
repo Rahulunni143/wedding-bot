@@ -20,14 +20,19 @@ WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzmfLLQR7sMlgo9uu0ZpRkUDR
 # ഒരു ഗൂഗിൾ ഫോം വഴിയോ വെബ് ആപ്പ് വഴിയോ അല്ലാതെ ഡാറ്റ വിടാൻ നമ്മൾ ഫോർമാറ്റ് ചെയ്യുന്നു
 def save_to_sheet(date_str, msg_text, count):
     try:
-        # ഷീറ്റിന്റെ ഐഡി വേർതിരിച്ചെടുക്കുന്നു
-        sheet_id = SHEET_URL.split("/d/")[1].split("/")[0]
-        
-        # ഗൂഗിൾ മാക്രോ/വെബ് ആപ്പ് വഴി ലളിതമായി ഡാറ്റ അയക്കാനുള്ള ലിങ്ക് (ഇത് ബാക്ക് എൻഡിൽ വർക്ക് ചെയ്യും)
-        # തൽക്കാലം കൗണ്ട് റീസെറ്റ് ആകാതിരിക്കാൻ താഴെയുള്ള ലോജിക് ബോട്ട് ചാനലിലേക്ക് തന്നെ അയക്കും
-        print(f"Saving to Sheet: {date_str} | {msg_text} | {count}")
-        return True
+        params = urllib.parse.urlencode({
+            'date': date_str,
+            'message': msg_text,
+            'count': count
+        })
+        url = f"{WEB_APP_URL}?{params}"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response:
+            res_text = response.read().decode('utf-8')
+            return "Success" in res_text
     except Exception as e:
+        print(f"Sheet Error: {e}")
+        return False
         print(f"Sheet Error: {e}")
         return False
 
