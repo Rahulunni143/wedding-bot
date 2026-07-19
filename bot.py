@@ -11,7 +11,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTyp
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 # 2. ബോട്ട് ടോക്കൺ
-TOKEN = "8891625701:AAGLzeTY1BPwt41ybing9MRtm-MskInPfAY"
+TOKEN = "8891625701:AAGLzeTYIBPwt41ybing9MRtm-MskInPfAY"
 
 # നിങ്ങളുടെ ഗൂഗിൾ ഷീറ്റിന്റെ ലിങ്ക്
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1VsAPpK2Bt56uwa8h2fQy4naN5vsRSTBW2keMn1IHRf4/edit?gid=0#gid=0"
