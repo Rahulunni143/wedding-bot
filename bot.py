@@ -7,6 +7,30 @@ from datetime import datetime
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 
+# --- പുതിയതായി ചേർത്ത വെബ് സെർവർ കോഡ് (Render Timeout ഒഴിവാക്കാൻ) ---
+import os
+from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is running perfectly!"
+
+def run():
+    # Render നൽകുന്ന PORT ഓട്ടോമാറ്റിക് ആയി എടുക്കും
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+
+# ബോട്ട് ബാക്ക്ഗ്രൗണ്ടിൽ എപ്പോഴും ലൈവ് ആയി ഇരിക്കാൻ ഇത് വിളിക്കുന്നു
+keep_alive()
+# -----------------------------------------------------------------
+
 # 1. ലോഗിങ് സെറ്റിങ്സ്
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -31,8 +55,6 @@ def save_to_sheet(date_str, msg_text, count):
             res_text = response.read().decode('utf-8')
             return "Success" in res_text
     except Exception as e:
-        print(f"Sheet Error: {e}")
-        return False
         print(f"Sheet Error: {e}")
         return False
 
@@ -63,3 +85,4 @@ if __name__ == '__main__':
     application = ApplicationBuilder().token(TOKEN).build()
     application.add_handler(MessageHandler(filters.ChatType.CHANNEL & filters.TEXT, handle_channel_post))
     application.run_polling()
+
