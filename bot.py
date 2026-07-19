@@ -15,7 +15,7 @@ TOKEN = "8891625701:AAGLzeTYlBPwt41ybing9MRtm-MskInPfAY"
 
 # നിങ്ങളുടെ ഗൂഗിൾ ഷീറ്റിന്റെ ലിങ്ക്
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1VsAPpK2Bt56uwa8h2fQy4naN5vsRSTBW2keMn1IHRf4/"
-WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzmfLLQR7sMlgo9uu0ZpRkUDRO7Thcks2cwSZpkJ2ABFywefFpr__0HInifTJh8-ziE/exec"
+WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwgIgoSG4XYNcf-D1OhSBJf9QgH-xXGmZuOir8BPvZnbt0zaJ6yrHss_rKDVv33UbKJ/exec"
 
 # ഒരു ഗൂഗിൾ ഫോം വഴിയോ വെബ് ആപ്പ് വഴിയോ അല്ലാതെ ഡാറ്റ വിടാൻ നമ്മൾ ഫോർമാറ്റ് ചെയ്യുന്നു
 def save_to_sheet(date_str, msg_text, count):
