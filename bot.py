@@ -19,14 +19,14 @@ def home():
     return "Bot is running perfectly!"
 
 def run():
-    # Render നൽകുന്ന PORT ഓട്ടോമാറ്റിക് ആയി എടുക്കും
     port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
+    # use_reloader=False ചേർത്തു
+    app.run(host='0.0.0.0', port=port, use_reloader=False)
 
 def keep_alive():
-    t = Thread(target=run)
+    # daemon=True ചേർത്തു
+    t = Thread(target=run, daemon=True)
     t.start()
-
 # ബോട്ട് ബാക്ക്ഗ്രൗണ്ടിൽ എപ്പോഴും ലൈവ് ആയി ഇരിക്കാൻ ഇത് വിളിക്കുന്നു
 keep_alive()
 # -----------------------------------------------------------------
